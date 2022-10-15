@@ -9,6 +9,8 @@ import java.io.Serializable;
 @Embeddable
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 @EqualsAndHashCode
 public class MovieCastKey implements Serializable {
 
