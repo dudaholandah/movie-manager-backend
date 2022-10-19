@@ -1,16 +1,14 @@
 package br.moviemanager.backend.model;
 
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
-import java.sql.Time;
 import java.time.LocalTime;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -40,8 +38,30 @@ public class Movie {
     @Column(name = "mov_language", length = 50)
     private String language;
 
-//    @OneToMany(mappedBy = "movie")
-//    @JsonBackReference
-//    private Set<MovieCast> characters;
+    @ManyToMany
+    @JsonManagedReference
+    @JoinTable(name = "moviegenres",
+            joinColumns = @JoinColumn(name = "fk_mov_id"),
+            inverseJoinColumns = @JoinColumn(name = "fk_gen_id"))
+    private Set<Genre> genres = new HashSet<>();
+
+    public void addGenre(Genre genre){
+        this.genres.add(genre);
+        genre.getMovies().add(this);
+    }
+
+    public void removeGenre(Long genreId) {
+        Genre genre = this.genres.stream().filter(t -> t.getId() == genreId).findFirst().orElse(null);
+        if (genre != null) {
+            this.genres.remove(genre);
+            genre.getMovies().remove(this);
+        }
+    }
+
+    public void removeGenres() {
+        for (Genre genre : new HashSet<>(genres)) {
+            removeGenre(genre.getId());
+        }
+    }
 
 }

@@ -1,13 +1,10 @@
 package br.moviemanager.backend.controller;
 
 import br.moviemanager.backend.model.Actor;
-import br.moviemanager.backend.repository.ActorRepository;
 import br.moviemanager.backend.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 

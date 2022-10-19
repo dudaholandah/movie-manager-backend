@@ -1,7 +1,6 @@
 package br.moviemanager.backend.service;
 
 import br.moviemanager.backend.DTO.MovieCastDTO;
-import br.moviemanager.backend.model.Actor;
 import br.moviemanager.backend.model.MovieCast;
 import br.moviemanager.backend.model.MovieCastKey;
 import org.springframework.http.ResponseEntity;
